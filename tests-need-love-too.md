@@ -70,9 +70,9 @@ view the source code online or in your favourite IDE.
 [^1]: If you’ve ever read TV or radio listings in a newspaper, magazine or online there’s a good chance what you’ve read has be-
 en through some of my software
 
-[^2] _[http://c2.com/cgi/wiki?TestInfected]:(http://c2.com/cgi/wiki?TestInfected)_
+[^2]: _[http://c2.com/cgi/wiki?TestInfected]:(http://c2.com/cgi/wiki?TestInfected)_
 
-[^3] _[http://craftsmanship.sv.cmu.edu/exercises/gilded-rose-kata]:(http://craftsmanship.sv.cmu.edu/exercises/gilded-rose-kata)_
+[^3]: _[http://craftsmanship.sv.cmu.edu/exercises/gilded-rose-kata]:(http://craftsmanship.sv.cmu.edu/exercises/gilded-rose-kata)_
 
 #### Introduction
 
@@ -200,9 +200,9 @@ tests were written using that, they might look like something like the code show
 
 ```
 describe('Updating Quality', function() {
-it('reduces the quality of a standard item', function() { ... })
-it('reduces the sell in value', function() { ... })
-it('raises the quality of aged brie', function() { ... })
+    it('reduces the quality of a standard item', function() { ... })
+    it('reduces the sell in value', function() { ... })
+    it('raises the quality of aged brie', function() { ... })
 })
 ```
 ```
@@ -247,8 +247,8 @@ is assumed to work, but seeing tests fail is just as important as it is when wri
 ```
 @Test
 public void neverAllowsQualityToBeNegative() {
-GildedRose gildedRose = new GildedRose(items);
-gildedRose.updateQuality();
+    GildedRose gildedRose = new GildedRose(items);
+    gildedRose.updateQuality();
 }
 ```
 ```
