@@ -84,11 +84,11 @@ _- Phil Karlton_
 In software development, naming should be easy, it’s something that must be done all the time; files, classes,
 methods, variables, so why is it so hard to get right? At the time of writing this book, a Google search for "pu-
 blic void test1() filetype:java" yields about 323,000 results! This is publicly available source code, yet each and
-every developer could not think of a better name for these tests than "test1".  It is highly unlikely that a class
+every developer could not think of a better name for these tests than "test1". It is highly unlikely that a class
 would be named "Class1" or a method "method1"^4 and for the same reason you shouldn’t name a test "test1".
 
 Early on in a developer’s education or career it is taught that something is named so that anyone working
-on the system can understand its purpose without having to read every line of code.  A quick look at some
+on the system can understand its purpose without having to read every line of code.  A quick look at some
 examples from the Java standard classes shows examples like:
 
 ```
@@ -221,8 +221,10 @@ One of the biggest problems with this is that these schemes are more tied to imp
 than focussing on behaviour and as such are not resilient to renaming and could eventually do more harm
 than good if the test name is not kept up to date.
 
-[^4]: I did once work on a system that had a method called "bodge_proc
+[^4]: I did once work on a system that had a method called `bodge_proc`
+
 [^5]: If your test suite is failing and you've pushed to production anyway, you've got much bigger problems!
+
 [^6]: A common sight for those practicing Test-Driven Development
 
 
@@ -262,7 +264,7 @@ rified test and the production code to make that test pass, the two should almos
 in either should make the test fail.
 
 As well as seeing the test fail, it is important to see the test fail for the right reason. A typical mistake is to
-check for the presence of the red bar only^10. This can be problematic when the problem lies within the test
+check for the presence of the red bar only[^10]. This can be problematic when the problem lies within the test
 itself as shown in listing 2.2.
 
 ```
@@ -298,7 +300,7 @@ will show that a NullPointerExpection has been thrown and that the test never ac
 
 Not only will this guarantee that the test is correct but when used in conjunction with a good naming stra-
 tegy outlined in chapter 1 it can help isolate problems with production code when bugs occur. Every test
-must include the "assert" part of "arrange-act-assert"^11 , and this is where the diagnostics can be checked and
+must include the "assert" part of "arrange-act-assert"[^11] , and this is where the diagnostics can be checked and
 improved upon. At the very least the assertion output should include both the expected and actual values.
 
 The GildedRose has a rule that states:
@@ -357,7 +359,7 @@ biggest contributor to hand-written diagnostic messages
 
 
 Diagnostics can be improved even further though by introducing a matching library. There are a variety
-available but the most widely available one is Hamcrest^12 , which is available for a variety of frameworks and
+available but the most widely available one is Hamcrest[^12] , which is available for a variety of frameworks and
 languages. These libraries are designed to match two values and produce rich diagnostics about a mismatch.
 They are typically shipped with common matchers, can be extended to match against custom objects. Rewri-
 ting the negative quality test in Hamcrest allows the test to fully embody what is to be verified and output
@@ -380,7 +382,7 @@ but: <-1> was less than <0>
 Listing 2.5: Diagnostics using Hamcrest
 ```
 The use of matching libraries also allows the tests to be less strict while maintaining good diagnostics. Listing
-[^2]:.5 asserts the value is greater than or equal to zero instead of the previous test, which ensured the value is
+2.5 asserts the value is greater than or equal to zero instead of the previous test, which ensured the value is
 exactly zero.
 
 ##### 2.1 Verifying Collections
@@ -444,10 +446,15 @@ Again, the rich diagnostics produced can help pinpoint the problem in the produc
 to read the test first.
 
 [^7]: I’ve worked on such systems and going back to anything less is like going back to the dark ages
+
 [^8] For more information see _[http://en.wikipedia.org/wiki/Continuous_delivery]:(http://en.wikipedia.org/wiki/Continuous_delivery)_
+
 [^9] For more information on the red-green-refactor cycle see _[http://www.jamesshore.com/Blog/Red-Green-Refactor.html]:(http://www.jamesshore.com/Blog/Red-Green-Refactor.html)_
+
 [^10]: This isn't limited to test-after, I have also seen TDD practitioners make this mistake
+
 [^11] _[http://c2.com/cgi/wiki?ArrangeActAssert]:(http://c2.com/cgi/wiki?ArrangeActAssert)_
+
 [^12] _[http://hamcrest.org]:(http://hamcrest.org)_
 
 
@@ -455,18 +462,18 @@ The previous chapter outlined how a comprehensive test suite can enable you to d
 allowing production code to be automatically regression tested. This fast-feedback cycle can mean the diffe-
 rence between finding a bug within a few seconds on a development machine or waiting until it is released
 and having users find it. Depending on the type of software being delivered, the identification of bugs in
-production can be massively expensive^13.
+production can be massively expensive[^13].
 
 ##### 3.1 Not testing enough
 
 One of the questions for someone new to automated testing is "what should I write tests for?". This can
 be answered naively by stating "everything", but testing everything can all too easily lead to wasting time
 writing tests that aren't needed. A much better answer to this question is "test anything that can reasonably
-break"^14. A common mistake seen (typically among more senior developers) is that the simpler the code, the
+break"[^14]. A common mistake seen (typically among more senior developers) is that the simpler the code, the
 less likely it is for it to break, but experience has shown the more complicated code is less likely to break pu-
 rely because its complexity leads to taking more care.
 
-The code in listing 3.1 is a fairly typical example of code that might be deemed too simple to break^15.
+The code in listing 3.1 is a fairly typical example of code that might be deemed too simple to break[^15].
 
 ```
 public static String join(String[] input) {
@@ -497,7 +504,7 @@ return result.toString();
 Listing 3.2: Performant but broken code
 ```
 At first glance the code seems to be ok, but leaves a trailing comma at the end of the result. This is an all-too-
-easy mistake to make, especially when in a rush or when tired^16. Even a single happy day scenario would be
+easy mistake to make, especially when in a rush or when tired[^16]. Even a single happy day scenario would be
 enough to catch this regression, but without such a test, the error will not come to light until later on in the
 development cycle. Because this code is utility code, it is likely to be used in many places and finding the bug
 could be time consuming.
@@ -514,7 +521,7 @@ empty strings within the array will affect the output.
 
 The previous section showed how even the simplest of code should have unit tests, but sometimes this can
 be taken too far and tests are written for code that **can never break**. The worst violations of this are tests that
-verify the runtime itself. For many years the FizzBuzz^17 test has been used to screen candidates for recruit-
+verify the runtime itself. For many years the FizzBuzz[^17] test has been used to screen candidates for recruit-
 ment and it is not uncommon to see tests that verify that the JVM can perform math or that object allocation
 itself works!
 
@@ -533,7 +540,7 @@ assertNotNull(new FizzBuzz());
 ```
 Listing 3.3: Tests that can never fail
 ```
-The tests shown in listing 3.3 can never ever fail^18. With the first test something has to be wrong with the
+The tests shown in listing 3.3 can never ever fail[^18]. With the first test something has to be wrong with the
 fundamentals of basic arithmetic and you have much bigger problems. With the second test an OutOfMemo-
 ryError will be raised and the runtime will be borked. Notice how it is not possible to give this test a name
 describing the behaviour under test- this can be a good indicator that the test is useless. Another indicator is
@@ -655,17 +662,24 @@ numbers faster, the easier targets are picked. I have heard stories of teams doi
 
 the testing of getters and setters of all objects because this can give a massive jump in coverage numbers.
 Unfortunately this can give a false sense of security as the coverage numbers are high, but the actual quantity
-of code tested is still very low. In this situation, high value code^20 should be identified and coverage used to
+of code tested is still very low. In this situation, high value code[^20] should be identified and coverage used to
 ensure tests are put in place and remain in place.
 
 [^13] _[http://bit.ly/costofbugs]:(http://bit.ly/costofbugs)_
+
 [^14] _[http://junit.sourceforge.net/doc/faq/faq.htm#best_]:(http://junit.sourceforge.net/doc/faq/faq.htm#best_)_
+
 [^15]: This is an example from a real system that I worked on in 2009 that had no unit tests around this code
+
 [^16]: This really happened and the code was being patched at 2am!
+
 [^17] _[http://c2.com/cgi/wiki?FizzBuzzTest]:(http://c2.com/cgi/wiki?FizzBuzzTest)_
+
 [^18]: I have used FizzBuzz as a screening test previously and seen these kinds of tests pop up many times
+
 [^19]: I would argue that if you are a TDD practitioner, coverage tools are of limited use as you should never be writing a line of
 code unless a test has forced it into existence
+
 [^20]: Code that is mission critical or that changes often
 
 
@@ -675,9 +689,9 @@ a huge boost to ensuring code can be kept clean and reduce future maintenance co
 TDD development methodology, the refactoring step is a mandatory part of the process. Refactoring and the
 principles of clean code are not only applicable to production code though, it is just as important to keep test
 code clean and maintainable. Test code will live as long as production code so should be treated with just as
-much care, if not more^21.
+much care, if not more[^21].
 
-One of the cornerstones of clean code are the SOLID^22 principles, of which the first is the “Single Responsibi-
+One of the cornerstones of clean code are the SOLID[^22] principles, of which the first is the “Single Responsibi-
 lity Principle”. This states that a class should have one and only one reason to change. When applied further,
 this means that a method of that class should perform a single subset of the responsibility of the class. When
 applied to production code this generally leads to small classes composed of small methods. When applied
@@ -689,7 +703,7 @@ for production code and test code. For example, the GildedRose code has the meth
 ages the items currently held. It could easily be argued that this is a single piece of behaviour, at least from the
 public API point of view, but the tests to back this up will be verifying all of the different code paths, leading
 to multiple “behaviours”. Because the public API exposes this as a single behaviour, and indeed a single
-method, a common approach is to test this from within a single test method^23. Taking this approach with the
+method, a common approach is to test this from within a single test method[^23]. Taking this approach with the
 GildedRose would yield a test method looking like that in listing 4.1.
 
 ```
@@ -747,7 +761,7 @@ assertEquals(50, items.get(0).getQuality());
 ```
 Listing 4.1: A test verifying the updateQuality() method on GildedRose.
 ```
-In order for this to completely cover all use cases, it would be much bigger than it is here^24 , but already this
+In order for this to completely cover all use cases, it would be much bigger than it is here[^24] , but already this
 test case is much bigger than it should be. The comments added should be a clue that multiple behaviours
 are being tested at once and that this should in fact be split up into multiple tests, all living as part of the same
 suite. In Chapter 1, the importance of naming was explained, and in Chapter 2 the importance of verification.
@@ -898,7 +912,7 @@ Listing 4.5: Setup per test
 ```
 The key here is to perform merciless refactoring on test code to remove duplication. In Listing 4.5 the code is
 mostly clean, but both tests still access the list item at element zero. This might not jump out immediately as
-duplication^25 , but as your test suite grows, refactoring this will pay dividends when things inevitably change.
+duplication[^25] , but as your test suite grows, refactoring this will pay dividends when things inevitably change.
 
 ```
 @Test
@@ -937,7 +951,7 @@ Duplication across tests can be a useful tool for identifying if the fixtures ar
 test class, slightly different setup per test is a sign that slight variations on the same thing are being tested.
 Wildly different setup or setup that is common among a few tests but not others is an indicator that the suite is
 not cohesive and should be broken up further. There is a belief there should be one-to-one mapping between
-test classes and a production class or method, but this is not the case at all^26. Given Listing 4.6, if another test
+test classes and a production class or method, but this is not the case at all[^26]. Given Listing 4.6, if another test
 were added that constructs the GildedRose in a different way or used an object that is not AgedBrie, it should
 not be in that suite, but in a suite of its own. If tests are named well, the names themselves might be a clue, i.e.
 a prefix common among some tests but not others are candidates for a separate test suite.
@@ -993,7 +1007,7 @@ solve. The most common way I have seen of doing this is to introduce “helper m
 works I have used have a much more flexible solution to this problem, matchers, which were introduced in
 Chapter 2.
 
-The Hamcrest library^27 has a concept known as a “Feature Matcher”, which allows the combining of field
+The Hamcrest library[^27] has a concept known as a “Feature Matcher”, which allows the combining of field
 extraction from an object and applying that to a chained matcher. An example of this is shown in listing 4.9.
 
 ```
@@ -1119,7 +1133,7 @@ Listing 4.13: FizzBuzz tests with rules of isolation, no-duplication, naming and
 Ignoring boilerplate, these tests now have less actual lines of code and apply several of the techniques outli-
 ned elsewhere in this book. For those interested in code complexity, the V(G) value has dropped from 5 to 1.
 
-The duplication inherent here can be further reduced by the use of examples^28 , which allow the same test to
+The duplication inherent here can be further reduced by the use of examples[^28] , which allow the same test to
 be executed multiple times for a given set of inputs. Whereas these are useful for cutting down on duplica-
 tion they can lose some of the richness of naming tests discretely when the behaviour needs to be called out
 explicitly. An example for FizzBuzz using Specs2 is showing in listing 4.14.
@@ -1128,10 +1142,10 @@ explicitly. An example for FizzBuzz using Specs2 is showing in listing 4.14.
 class FizzBuzzSpec extends Specification with DataTables {
 "fizz buzz should return the correct value" ^ {
 "input" | "output" |
-[^3]:! "Fizz" |
-[^5]:! "Buzz" |
-[^15]:! "FizzBuzz" |
-[^7]:! "7" |>
+3:! "Fizz" |
+5:! "Buzz" |
+15:! "FizzBuzz" |
+7:! "7" |>
 { (input, output) => FizzBuzz.of(input) must_== output }
 }
 ```
@@ -1141,9 +1155,9 @@ Listing 4.14: A Specs2 test using a data table
 A special case of production logic duplication is that where a test makes use of a production method but that
 method can later be changed to mean something else. Because tests concern themselves with asserting things
 that are equal this problem usually manifests itself by overriding the meaning of “equals” in languages that
-support it as a native construct^29. With the GildedRose Item class, there may be tests that want to verify all
+support it as a native construct[^29]. With the GildedRose Item class, there may be tests that want to verify all
 fields are set correctly after some logic has been performed- or more likely only a subsets of fields need to be
-checked but using equality is quicker and easier than writing a custom matcher^30.
+checked but using equality is quicker and easier than writing a custom matcher[^30].
 
 ```
 public boolean equals(Object o) {
@@ -1171,15 +1185,24 @@ to the fact the assertion contract is now weaker than it originally was.
 
 [^21]: You can rewrite your entire production code and let the tests verify the new code is correct, but you cannot throw away
 your test code and do the same!
+
 [^22] _[http://bit.ly/whatissolid]:(http://bit.ly/whatissolid)_
+
 [^23]: For an example of this in the wild, check out the CookieTest.java in the GWT codebase
+
 [^24]: Fully implementing the all the tests was sapping my will to live
+
 [^25]: I’ve had a lot of arguments over the years on removing this level of duplication!
+
 [^26]: I believe this stems from naming test classes the same as the production classes with “Test” at the end, a throwback to the
 early test runners
+
 [^27]: Available for all major languages
+
 [^28]: Also know as data tables or data points
+
 [^29]: In Java this would be overriding the equals() method; Scala and Ruby allow the overriding of the ‘==’ operator.
+
 [^30]: Especially when using an IDE that allows the generation of such methods
 
 
@@ -1193,7 +1216,7 @@ and/or flaky tests can lead to the sort of pain that stops tests being run, eith
 a continuous integration environment.
 
 One area this rule is usually violated is in modifying system state, that is, state that is maintained system wide
-and not confined to the local object graph. Prime examples of this are code that use system time^31 , singletons^32
+and not confined to the local object graph. Prime examples of this are code that use system time[^31] , singletons[^32]
 or use an external resource like a database. The fact that these things are hard to test or are not completely
 deterministic is the codes way of signifying that dependencies are not explicit and that production code is
 too tightly coupled. Running unit tests in parallel is a sure fire way to catch these kind of isolation problems
@@ -1201,7 +1224,7 @@ early on.
 
 When I first started with unit testing, following these guidelines seemed like overhead and introducing unne-
 cessary abstractions. For example, code that would read data from a file had to be written in such a way that it
-knew nothing of files and needed to accept data in a different way. In Java this meant using an InputStream^33
+knew nothing of files and needed to accept data in a different way. In Java this meant using an InputStream[^33]
 so that it could be replaced for testing. This of course meant that some other piece of code was responsible
 for the opening of the file and creating the InputStream and doing all the necessary checks that came with it.
 Although unit testing forced the separation, the end result was two classes that much better adhered to the
@@ -1269,9 +1292,9 @@ Listing 5.2: Using mocks to verify interactions between the GildedRose and Merch
 The mocks here state that when the acceptVisitFrom(merchant) method is called there must be one and only
 one call to merchant.itemsForSale() and when that call happens the specified list of items will be returned. To
 any developer experienced with mocking frameworks this is standard fare, but what is less common is the
-knowledge that there are other kinds of test doubles^34 available. The most useful of these are the stub and fake.
+knowledge that there are other kinds of test doubles[^34] available. The most useful of these are the stub and fake.
 Stubs are implementations of a class that provide nothing but canned responses. The classic xkcd comic about
-random numbers^35 is a perfect example of a stub implementation. For the GildedRose Merchant interaction a
+random numbers[^35] is a perfect example of a stub implementation. For the GildedRose Merchant interaction a
 stub would always return the same list of items no matter where or when it is called.
 
 ```
@@ -1395,7 +1418,7 @@ replacing with a different type of test double.
 
 Changing how the production code interacts with collaborators is a time at which the correct choice of test
 double becomes most important. To illustrate this, the Merchant API will change to accept a “shopping list”
-when returning the list of items for sale. This is just a list of item names^36 that the GildedRose is interested in
+when returning the list of items for sale. This is just a list of item names[^36] that the GildedRose is interested in
 and only items within that list should be returned by the merchant, as shown in Listing 5.6.
 
 ```
@@ -1500,7 +1523,7 @@ Centre is no longer incidental, resulting in a state change on the GildedRose, t
 and hence must be verified. Testing this could be handled with a fake, but the amount of work required to
 implement the fake outweighs the use of a mock. Also, if the interaction requires that this happens once and
 only once the amount of logic in the fake increases – this is one of the reasons that mock frameworks were
-invented in the first place^37.
+invented in the first place[^37].
 
 The introduction of the recycling centre modifies existing logic – that of the updateQuality method, and all
 existing code will fail to compile because of the need to introduce the RecyclingCentre into the constructor of
@@ -1526,7 +1549,7 @@ is where an acceptable real class exists that can be substituted. In Java there 
 that _“Reads text from a character-input stream, buffering characters so as to provide for the efficient reading of charac-_
 
 
-_ters, arrays, and lines”_^38_._ It is possible to mock out the use of this class, but instead there are implementations
+_ters, arrays, and lines”_[^38]_._ It is possible to mock out the use of this class, but instead there are implementations
 that exist that can be used directly within the test. Both solutions are shown in listing 5.9.
 
 ```
@@ -1560,21 +1583,29 @@ interacts with the BufferedReader and is hence less brittle.
 
 The other example of when not to mock 3rd party interfaces is when a unit test is the wrong kind of test to
 perform. This is best exemplified when interacting with 3rd party systems, e.g. a database. Not only is it
-nearly impossible to get the order of execution correct with a mocking framework^39 but again does not verify
+nearly impossible to get the order of execution correct with a mocking framework[^39] but again does not verify
 the code is doing what you want it to do, only what you think it should do. For these kinds of tests the best
 thing to do is to actually write an integration test that interacts with the service in question. For a database
 this would be round-tripping to an in-memory database or a real database. The only way to be sure this code
 performs correctly is to exercise it.
 
 [^31]: Most languages have libraries available for mutating system time, please don’t use them
+
 [^32]: This is the one of my many reasons for hating the Singleton pattern
+
 [^33]: This was back before Java had a rich streams API
+
 [^34] _[http://xunitpatterns.com/Test%20Double.html]:(http://xunitpatterns.com/Test%20Double.html)_
+
 [^35] _[http://xkcd.com/221/]:(http://xkcd.com/221/)_
+
 [^36]: Obviously in real-life the use of such primitives should be avoided, but we’ll keep it as strings for the sake of brevity
+
 [^37]: Steve Freeman, one of the authors of jMock explained that they wrote it because they spent so much time writing and
 maintaining fakes
+
 [^38] _[http://docs.oracle.com/javase/8/docs/api/java/io/BufferedReader.html]:(http://docs.oracle.com/javase/8/docs/api/java/io/BufferedReader.html)_
+
 [^39]: I’ve tried this with JDBC and it’s a complete nightmare
 
 
@@ -1665,7 +1696,7 @@ times without a change to behaviour?
 When checking values, the key is to only look for what you really want. With numbers this could be the diffe-
 rence between equalTo(10) and greaterThan(10). The former would fail for any value other than 10 whereas
 the latter will ensure the value is above 10. With strings it’s important to know if the entire string is important
-or just a portion^40.
+or just a portion[^40].
 
 When working with object graphs the principles apply – only assert on what is important for that specific
 test. Checking an entire object graph can lead to the dreaded multiple test failure scenarios when the struc-
