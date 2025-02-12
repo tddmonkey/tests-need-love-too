@@ -26,7 +26,7 @@ I realised the importance of testing, but unfortunately this didn’t come until
 my first programming job.
 
 I was working on a system that would take TV listings in a raw, custom format and convert them, according
-to various rules, into the format that our many customers wanted^1. I had a very simple change to make and
+to various rules, into the format that our many customers wanted[^1]. I had a very simple change to make and
 knew that it would only affect a few customers so I made it and pushed it to production only to find that the
 change I made affected everybody! Vowing to never make this mistake again I wrote a Perl script that would
 exercise the existing production version of the code and a release candidate over all data for every customer.
