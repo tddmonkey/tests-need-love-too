@@ -74,7 +74,7 @@ en through some of my software
 
 [^3]: _[http://craftsmanship.sv.cmu.edu/exercises/gilded-rose-kata]:(http://craftsmanship.sv.cmu.edu/exercises/gilded-rose-kata)_
 
-#### Introduction
+# Introduction
 
 
 _"There are only two hard problems in Computer Science: cache invalidation and naming things."_
@@ -140,7 +140,7 @@ public void updateQuality() { ... }
 ```
 @Test
 ```
-## 1 Naming
+# 1 Naming
 
 
 ```
@@ -270,8 +270,8 @@ itself as shown in listing 2.2.
 ```
 @Test
 public void neverAllowsQualityToBeNegative() {
-GildedRose gildedRose = null;
-gildedRose.updateQuality();
+    GildedRose gildedRose = null;
+    gildedRose.updateQuality();
 }
 ```
 ```
@@ -284,7 +284,7 @@ When just looking for the red bar and nothing more, the usual cycle to follow is
 - See the test is incorrect
 - Fix the test and see it pass
 
-## 2 Verification
+# 2 Verification
 
 
 By doing this, the test has still never been verified and again there should be no confidence that the test is
@@ -313,9 +313,9 @@ to write the error diagnostics text by hand, as shown in listing 2.3.
 ```
 @Test
 public void neverAllowsQualityToBeNegative() {
-Item itemAtMinQuality = itemWithQualityAt(0);
-updateQualityOf(itemAtMinQuality);
-assertTrue("Item quality should not be negative", itemAtMinQuality.getQuality() >= 0);
+    Item itemAtMinQuality = itemWithQualityAt(0);
+    updateQualityOf(itemAtMinQuality);
+    assertTrue("Item quality should not be negative", itemAtMinQuality.getQuality() >= 0);
 }
 ```
 ```
@@ -330,9 +330,9 @@ the diagnostics will change if the rules do.
 ```
 @Test
 public void neverAllowsQualityToBeNegative() {
-Item itemAtMinQuality = itemWithQualityAt(0);
-updateQualityOf(itemAtMinQuality);
-assertEquals(0, itemAtMinQuality.getQuality());
+    Item itemAtMinQuality = itemWithQualityAt(0);
+    updateQualityOf(itemAtMinQuality);
+    assertEquals(0, itemAtMinQuality.getQuality());
 }
 ```
 ```
@@ -368,9 +368,9 @@ much nicer diagnostics.
 ```
 @Test
 public void public void neverAllowsQualityToBeNegative() {
-Item itemAtMinQuality = itemWithQualityAt(0);
-updateQualityOf(itemAtMinQuality);
-assertThat(itemAtMinQuality.getQuality(), greaterThanOrEqualTo(0));
+    Item itemAtMinQuality = itemWithQualityAt(0);
+    updateQualityOf(itemAtMinQuality);
+    assertThat(itemAtMinQuality.getQuality(), greaterThanOrEqualTo(0));
 }
 ```
 ```
@@ -385,7 +385,7 @@ The use of matching libraries also allows the tests to be less strict while main
 2.5 asserts the value is greater than or equal to zero instead of the previous test, which ensured the value is
 exactly zero.
 
-##### 2.1 Verifying Collections
+## 2.1 Verifying Collections
 
 An area that can cause a lot of grief for producing good diagnostics is when working with and attempting to
 verify collections, especially unordered collections. By far and away the biggest violation here is to merely
@@ -401,11 +401,11 @@ diagnostics will not give useful information when the code does not work correct
 ```
 @Test
 public void public void removesItemsPassedTheirSellByDate() {
-Item itemtoBeRemoved = itemWithSellIn(0);
-Item itemtoBeRetained = itemWithSellIn(1);
-List<Item> remainingItems =
-updateQualityOf(itemtoBeRemoved, itemtoBeRetained);
-assertEquals(1, remainingItems.size());
+    Item itemtoBeRemoved = itemWithSellIn(0);
+    Item itemtoBeRetained = itemWithSellIn(1);
+    List<Item> remainingItems =
+    updateQualityOf(itemtoBeRemoved, itemtoBeRetained);
+    assertEquals(1, remainingItems.size());
 }
 ```
 ```
@@ -424,14 +424,11 @@ to match exactly what is required and no more.
 ```
 @Test
 public void public void removesItemsPassedTheirSellByDate() {
-```
-
-```
-Item itemtoBeRemoved = itemWithSellIn(0);
-Item itemtoBeRetained = itemWithSellIn(1);
-List<Item> remainingItems =
-updateQualityOf(itemtoBeRemoved, itemtoBeRetained);
-assertThat(remainingItems, containsInAnyOrder(itemtoBeRetained));
+    Item itemtoBeRemoved = itemWithSellIn(0);
+    Item itemtoBeRetained = itemWithSellIn(1);
+    List<Item> remainingItems =
+    updateQualityOf(itemtoBeRemoved, itemtoBeRetained);
+    assertThat(remainingItems, containsInAnyOrder(itemtoBeRetained));
 }
 ```
 ```
@@ -457,14 +454,14 @@ to read the test first.
 
 [^12] _[http://hamcrest.org]:(http://hamcrest.org)_
 
-
+# 3 Test Coverage
 The previous chapter outlined how a comprehensive test suite can enable you to deliver software faster by
 allowing production code to be automatically regression tested. This fast-feedback cycle can mean the diffe-
 rence between finding a bug within a few seconds on a development machine or waiting until it is released
 and having users find it. Depending on the type of software being delivered, the identification of bugs in
 production can be massively expensive[^13].
 
-##### 3.1 Not testing enough
+## 3.1 Not testing enough
 
 One of the questions for someone new to automated testing is "what should I write tests for?". This can
 be answered naively by stating "everything", but testing everything can all too easily lead to wasting time
@@ -477,11 +474,11 @@ The code in listing 3.1 is a fairly typical example of code that might be deemed
 
 ```
 public static String join(String[] input) {
-String result = "";
-for (String value : input) {
-result += value + ",";
-}
-return result.substring(0, result.length());
+    String result = "";
+    for (String value : input) {
+        result += value + ",";
+    }
+    return result.substring(0, result.length());
 }
 ```
 ```
@@ -493,11 +490,11 @@ simple change by anyone's standard and the resulting code is shown in listing 3.
 
 ```
 public static String join(String[] input) {
-StringBuilder result = new StringBuilder();
-for (String value : input) {
-result.append(value).append(",");
-}
-return result.toString();
+    StringBuilder result = new StringBuilder();
+    for (String value : input) {
+        result.append(value).append(",");
+    }
+    return result.toString();
 }
 ```
 ```
@@ -514,10 +511,7 @@ should work, but in this case the presence of additional tests to the happy day 
 code performs when unexpected inputs are provided, for example how an empty or null is handled or how
 empty strings within the array will affect the output.
 
-## 3 Test Coverage
-
-
-##### 3.2 Testing Too Much
+## 3.2 Testing Too Much
 
 The previous section showed how even the simplest of code should have unit tests, but sometimes this can
 be taken too far and tests are written for code that **can never break**. The worst violations of this are tests that
@@ -528,13 +522,13 @@ itself works!
 ```
 @Test
 public void fizzBuzzWorks() {
-assertTrue(15 % 3 == 0);
+    assertTrue(15 % 3 == 0);
 }
 ```
 ```
 @Test
 public void fizzBuzzCanBeInstantiated() {
-assertNotNull(new FizzBuzz());
+    assertNotNull(new FizzBuzz());
 }
 ```
 ```
@@ -555,14 +549,12 @@ ructors and creation of getters/setters anyway.
 ```
 @Test
 public void public void constructsItemCorrectly() {
-Item item = new Item("Item Name", 5, 10);
-assertEquals("Item Name", item.getName());
-assertEquals(5, item.getSellIn());
-assertEquals(10, item.getQuality());
-```
-```
-item.setQuality(15);
-assertEquals(15, item.getQuality());
+    Item item = new Item("Item Name", 5, 10);
+    assertEquals("Item Name", item.getName());
+    assertEquals(5, item.getSellIn());
+    assertEquals(10, item.getQuality());
+    item.setQuality(15);
+    assertEquals(15, item.getQuality());
 }
 ```
 ```
@@ -579,12 +571,12 @@ how to test exceptions will show many examples like that shown in listing 3.5.
 ```
 @Test
 public void willRaiseException() {
-try {
-codeThatRaisesException();
-fail("exception not raised");
-} catch (ExceptionToBeRaised e) {
-// success!
-}
+    try {
+        codeThatRaisesException();
+        fail("exception not raised");
+    } catch (ExceptionToBeRaised e) {
+        // success!
+    }
 }
 ```
 ```
@@ -598,7 +590,7 @@ to @Test.
 ```
 @Test(expected = ExceptionToBeRaised.class)
 public void willRaiseException() throws Exception {
-codeThatRaisesException();
+    codeThatRaisesException();
 }
 ```
 ```
@@ -607,7 +599,7 @@ Listing 3.6: Removal of boilerplate
 There is a caveat to using this approach over the previous version, this test will pass if the expected exception
 is raised anywhere within the test body and not just from the line that you're expected it to be raised from.
 
-##### 3.3 Coverage
+## 3.3 Coverage
 
 A popular technique for identifying how much code has been tested is the use of a code coverage tool. These
 work by reporting which lines of code are executed while tests are running. The more advanced tools will
@@ -625,25 +617,22 @@ production code has been _covered_ but not actually _tested_.
 ```
 @Test
 public void byNotAssertingTheMultiplesOfThreeBranch() {
-FizzBuzz.of(3);
+    FizzBuzz.of(3);
 }
-```
-```
+
 @Test
 public void byNotAssertingTheMultiplesOfFiveBranch () {
-FizzBuzz.of(5);
+    FizzBuzz.of(5);
 }
-```
-```
+
 @Test
 public void byNotAssertingTheMultiplesOfFifteenBranch () {
-FizzBuzz.of(15);
+    FizzBuzz.of(15);
 }
-```
-```
+
 @Test
 public void byNotAssertingTheDefaultBranch () {
-FizzBuzz.of(1);
+    FizzBuzz.of(1);
 }
 ```
 ```
@@ -682,7 +671,7 @@ code unless a test has forced it into existence
 
 [^20]: Code that is mission critical or that changes often
 
-
+# 4 Test Cleanliness
 The presence of unit tests can be essential for performing worry free refactoring on production code. The
 ability to completely change production code and nearly immediately know that it still works correctly is
 a huge boost to ensuring code can be kept clean and reduce future maintenance costs. For those who use a
@@ -708,54 +697,46 @@ GildedRose would yield a test method looking like that in listing 4.1.
 
 ```
 public class GildedRoseWill {
-@Test
-public void ageItems() {
-List<Item> items = new ArrayList<Item>();
-items.add(new Item("+5 Dexterity Vest", 10, 20));
-items.add(new Item("Aged Brie", 2, 0));
-items.add(new Item("Elixir of the Mongoose", 5, 7));
-items.add(new Item("Sulfuras, Hand of Ragnaros", 0, 80));
-items.add(new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20));
-items.add(new Item("Conjured Mana Cake", 3, 6));
-GildedRose gildedRose = new GildedRose(items);
-gildedRose.updateQuality();
-assertEquals(19, items.get(0).getQuality());
-assertEquals(9, items.get(0).getSellIn());
-// "Aged Brie" increases in Quality the older it gets
-assertEquals(1, items.get(1).getQuality());
-assertEquals(1, items.get(1).getSellIn());
-assertEquals(6, items.get(2).getQuality());
-assertEquals(4, items.get(2).getSellIn());
-// "Sulfuras" never has to be sold or decreases in Quality
-assertEquals(0, items.get(3).getSellIn());
-// ... or decreases in Quality
-assertEquals(80, items.get(3).getQuality());
-// backstage passes increase in quality
-assertEquals(21, items.get(4).getQuality());
-assertEquals(14, items.get(4).getSellIn());
-// conjured items degrade twice as fast
-assertEquals(4, items.get(5).getQuality());
-assertEquals(2, items.get(5).getSellIn());
-```
-```
-items = new ArrayList<Item>();
-items.add(new Item("+5 Dexterity Vest", 10, 0));
-```
-## 4 Test Cleanliness
-
-
-```
-gildedRose = new GildedRose(items);
-gildedRose.updateQuality();
-assertEquals(0, items.get(0).getQuality());
-```
-```
-items = new ArrayList<Item>();
-items.add(new Item("Aged Brie", 2, 50));
-gildedRose = new GildedRose(items);
-gildedRose.updateQuality();
-assertEquals(50, items.get(0).getQuality());
-}
+    @Test
+    public void ageItems() {
+        List<Item> items = new ArrayList<Item>();
+        items.add(new Item("+5 Dexterity Vest", 10, 20));
+        items.add(new Item("Aged Brie", 2, 0));
+        items.add(new Item("Elixir of the Mongoose", 5, 7));
+        items.add(new Item("Sulfuras, Hand of Ragnaros", 0, 80));
+        items.add(new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20));
+        items.add(new Item("Conjured Mana Cake", 3, 6));
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertEquals(19, items.get(0).getQuality());
+        assertEquals(9, items.get(0).getSellIn());
+        // "Aged Brie" increases in Quality the older it gets
+        assertEquals(1, items.get(1).getQuality());
+        assertEquals(1, items.get(1).getSellIn());
+        assertEquals(6, items.get(2).getQuality());
+        assertEquals(4, items.get(2).getSellIn());
+        // "Sulfuras" never has to be sold or decreases in Quality
+        assertEquals(0, items.get(3).getSellIn());
+        // ... or decreases in Quality
+        assertEquals(80, items.get(3).getQuality());
+        // backstage passes increase in quality
+        assertEquals(21, items.get(4).getQuality());
+        assertEquals(14, items.get(4).getSellIn());
+        // conjured items degrade twice as fast
+        assertEquals(4, items.get(5).getQuality());
+        assertEquals(2, items.get(5).getSellIn());
+        
+        items = new ArrayList<Item>();
+        items.add(new Item("+5 Dexterity Vest", 10, 0));
+        gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertEquals(0, items.get(0).getQuality());
+        items = new ArrayList<Item>();
+        items.add(new Item("Aged Brie", 2, 50));
+        gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertEquals(50, items.get(0).getQuality());
+    }
 }
 ```
 ```
@@ -780,14 +761,14 @@ of testable behaviour as shown in listing 4.2.
 
 ```
 public class AgingAnItemWill {
-@Test
-public void increaseTheQualityOfAgedBrie() {
-List<Item> items = new ArrayList<Item>();
-items.add(new Item("Aged Brie", 2, 0));
-GildedRose gildedRose = new GildedRose(items);
-gildedRose.updateQuality();
-assertEquals(1, items.get(0).getQuality());
-}
+    @Test
+    public void increaseTheQualityOfAgedBrie() {
+        List<Item> items = new ArrayList<Item>();
+        items.add(new Item("Aged Brie", 2, 0));
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertEquals(1, items.get(0).getQuality());
+    }
 }
 ```
 ```
@@ -802,7 +783,7 @@ single assertion. Multiple assertions are fine as long as they are verifying a s
 of individual asserts grows though, this is a smell that perhaps the test isn’t focussed enough or that custom
 matchers should be employed.
 
-##### 4.1 Duplication
+## 4.1 Duplication
 
 Breaking large tests into smaller tests will undoubtedly lead to a certain level of duplication within the test
 code and the normal rules of clean code apply here. All testing frameworks I have worked with have the
@@ -812,24 +793,23 @@ test executes. Some frameworks also have the ability to execute code before and 
 
 ```
 public class AgingAgedBrie {
-@Test
-public void increaseTheQuality() {
-List<Item> items = new ArrayList<Item>();
-items.add(new Item("Aged Brie", 2, 0));
-GildedRose gildedRose = new GildedRose(items);
-gildedRose.updateQuality();
-assertEquals(1, items.get(0).getQuality());
-}
-```
-```
-@Test
-public void decreasesTheSellIn () {
-List<Item> items = new ArrayList<Item>();
-items.add(new Item("Aged Brie", 2, 0));
-GildedRose gildedRose = new GildedRose(items);
-gildedRose.updateQuality();
-assertEquals(1, items.get(0). getSellIn ());
-}
+    @Test
+    public void increaseTheQuality() {
+        List<Item> items = new ArrayList<Item>();
+        items.add(new Item("Aged Brie", 2, 0));
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertEquals(1, items.get(0).getQuality());
+    }
+    
+    @Test
+    public void decreasesTheSellIn () {
+        List<Item> items = new ArrayList<Item>();
+        items.add(new Item("Aged Brie", 2, 0));
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+        assertEquals(1, items.get(0). getSellIn ());
+    }
 }
 ```
 ```
@@ -839,26 +819,23 @@ Code that is executed before every test method should always be moved into the c
 
 ```
 public class AgingAgedBrie {
-private List<Item> items;
-```
-```
-@Before
-public void setUp() throws Exception {
-items = new ArrayList<Item>(); gildedRose.updateQuality();
-items.add(new Item("Aged Brie", 2, 0)); gildedRose.updateQuality();
-}
-```
-```
-@Test
-public void increaseTheQuality() {
-assertEquals(1, items.get(0).getQuality());
-}
-```
-```
-@Test
-public void decreasesTheSellIn() {
-assertEquals(1, items.get(0).getSellIn());
-}
+    private List<Item> items;
+
+    @Before
+    public void setUp() throws Exception {
+        items = new ArrayList<Item>(); gildedRose.updateQuality();
+        items.add(new Item("Aged Brie", 2, 0)); gildedRose.updateQuality();
+    }
+    
+    @Test
+    public void increaseTheQuality() {
+        assertEquals(1, items.get(0).getQuality());
+    }
+    
+    @Test
+    public void decreasesTheSellIn() {
+        assertEquals(1, items.get(0).getSellIn());
+    }
 }
 ```
 ```
@@ -876,35 +853,30 @@ as shown in Listing 4.5.
 
 ```
 public class AgingAgedBrie {
-private List<Item> items;
-```
-```
-@Before
-public void setUp() throws Exception {
-items = new ArrayList<Item>();
-}
-```
+    private List<Item> items;
 
-```
-@Test
-public void increaseTheQuality() {
-havingUpdatedGildedRoseWithAgedBrie(2, 0);
-assertEquals(1, items.get(0).getQuality());
-}
-```
-```
-@Test
-public void decreasesTheSellIn() {
-havingUpdatedGildedRoseWithAgedBrie(6, 4);
-assertEquals(5, items.get(0).getSellIn());
-}
-```
-```
-private void havingUpdatedGildedRoseWithAgedBrie(int sellIn, int quality) {
-items.add(new Item("Aged Brie", sellIn, quality));
-GildedRose gildedRose = new GildedRose(items);
-gildedRose.updateQuality();
-}
+    @Before
+    public void setUp() throws Exception {
+        items = new ArrayList<Item>();
+    }
+    
+    @Test
+    public void increaseTheQuality() {
+        havingUpdatedGildedRoseWithAgedBrie(2, 0);
+        assertEquals(1, items.get(0).getQuality());
+    }
+    
+    @Test
+    public void decreasesTheSellIn() {
+        havingUpdatedGildedRoseWithAgedBrie(6, 4);
+        assertEquals(5, items.get(0).getSellIn());
+    }
+    
+    private void havingUpdatedGildedRoseWithAgedBrie(int sellIn, int quality) {
+        items.add(new Item("Aged Brie", sellIn, quality));
+        GildedRose gildedRose = new GildedRose(items);
+        gildedRose.updateQuality();
+    }
 }
 ```
 ```
@@ -917,20 +889,18 @@ duplication[^25] , but as your test suite grows, refactoring this will pay divid
 ```
 @Test
 public void increaseTheQuality() {
-havingUpdatedGildedRoseWithAgedBrie(2, 0);
-assertEquals(1, agedBrie().getQuality());
+    havingUpdatedGildedRoseWithAgedBrie(2, 0);
+    assertEquals(1, agedBrie().getQuality());
 }
-```
-```
+
 @Test
 public void decreasesTheSellIn() {
-havingUpdatedGildedRoseWithAgedBrie(6, 4);
-assertEquals(5, agedBrie().getSellIn());
+    havingUpdatedGildedRoseWithAgedBrie(6, 4);
+    assertEquals(5, agedBrie().getSellIn());
 }
-```
-```
+
 private Item agedBrie() {
-return items.get(0);
+    return items.get(0);
 }
 ```
 ```
@@ -964,24 +934,22 @@ production code and again introduces a high level of duplication. Take the code 
 ```
 @Test
 public void increasesTheQualityOfBackstagePasses() {
-assertEquals(21, backstagePass().getQuality());
+    assertEquals(21, backstagePass().getQuality());
 }
+
 @Test
 public void increaseTheQualityOfAgedBrie() {
-assertEquals(1, agedBrie().getQuality());
+    assertEquals(1, agedBrie().getQuality());
 }
-```
-```
+
 @Test
 public void willNotAffectTheQualityOfSulfuras() {
-assertEquals(80, sulfuras().getQuality());
+    assertEquals(80, sulfuras().getQuality());
 }
-```
-```
+
 @Test
 public void decreasesTheQualityOfConjuredItemsTwiceAsFast () {
-assertEquals(4, conjuredItem().getQuality());
-}
+    assertEquals(4, conjuredItem().getQuality());
 }
 ```
 ```
@@ -996,7 +964,7 @@ easily solved with more syntactic sugar.
 ```
 @Test
 public void increaseTheQualityOfAgedBrie() {
-assertEquals(1, qualityOf(agedBrie()));
+    assertEquals(1, qualityOf(agedBrie()));
 }
 ```
 ```
@@ -1013,17 +981,16 @@ extraction from an object and applying that to a chained matcher. An example of 
 ```
 @Test
 public void increaseTheQualityOfAgedBrie() {
-assertThat(agedBrie(), hasQuality(equalTo(2)));
+    assertThat(agedBrie(), hasQuality(equalTo(2)));
 }
-```
-```
+
 private Matcher<? super Item> hasQuality(Matcher<Integer> matcher) {
-return new FeatureMatcher<Item, Integer>(matcher, "quality", "quality") {
-@Override
-protected Integer featureValueOf(Item item) {
-return item.getQuality();
-}
-}
+    return new FeatureMatcher<Item, Integer>(matcher, "quality", "quality") {
+        @Override
+        protected Integer featureValueOf(Item item) {
+            return item.getQuality();
+        }
+    } 
 }
 ```
 ```
@@ -1049,20 +1016,19 @@ For example using Scala in conjunction with the Specs2 testing library yields th
 
 ```
 "aging items" should {
-"increase the quality of aged brie" in {
-agedBrie must haveQuality(===(2))
-}
-```
-```
-def haveQuality(matcher: Matcher[Int]): Matcher[Item] = {
-matchA[Item].quality(matcher)
-}
+    "increase the quality of aged brie" in {
+        agedBrie must haveQuality(===(2))
+    }
+
+    def haveQuality(matcher: Matcher[Int]): Matcher[Item] = {
+        matchA[Item].quality(matcher)
+    }
 }
 ```
 ```
 Listing 4.11: Feature matcher using Scala and Specs
 ```
-##### 4.2 Duplicating production Logic
+## 4.2 Duplicating production Logic
 
 There is another case of duplication that is often overlooked- duplicating production logic within tests. This
 occurs when an attempt is made to cover all possible inputs instead of choosing meaningful and interesting
@@ -1072,17 +1038,17 @@ ming the same looping and logic within the test as shown in Listing 4.12.
 ```
 @Test
 public void calculatesAllValuesCorrectly() {
-for (int i=1 ; i<101 ; i++) {
-if (i % 3 == 0) {
-assertEquals("Fizz", FizzBuzz.of(i));
-} else if (i % 5 == 0) {
-assertEquals("Buzz", FizzBuzz.of(i));
-} else if (i % 15 == 0) {
-assertEquals("FizzBuzz", FizzBuzz.of(i));
-} else {
-assertEquals(Integer.toString(i), FizzBuzz.of(i));
-}
-}
+    for (int i=1 ; i<101 ; i++) {
+         if (i % 3 == 0) {
+             assertEquals("Fizz", FizzBuzz.of(i));
+         } else if (i % 5 == 0) {
+             assertEquals("Buzz", FizzBuzz.of(i));
+         } else if (i % 15 == 0) {
+             assertEquals("FizzBuzz", FizzBuzz.of(i));
+         } else {
+             assertEquals(Integer.toString(i), FizzBuzz.of(i));
+         }
+    }
 }
 ```
 ```
@@ -1106,25 +1072,22 @@ naming the test would resemble something more like that shown in listing 4.13.
 ```
 @Test
 public void fizzForMuliplesOfThree() {
-assertEquals("Fizz", fizzBuzzOf(3));
+    assertEquals("Fizz", fizzBuzzOf(3));
 }
-```
-```
+
 @Test
 public void buzzForMuliplesOfFive() {
-assertEquals("Buzz", fizzBuzzOf(5));
+    assertEquals("Buzz", fizzBuzzOf(5));
 }
-```
-```
+
 @Test
 public void fizzBuzzForMuliplesOfThree() {
-assertEquals("FizzBuzz", fizzBuzzOf(15));
+    assertEquals("FizzBuzz", fizzBuzzOf(15));
 }
-```
-```
+
 @Test
 public void theInputForEverythingElse() {
-assertEquals("7", fizzBuzzOf(7));
+    assertEquals("7", fizzBuzzOf(7));
 }
 ```
 ```
@@ -1140,13 +1103,14 @@ explicitly. An example for FizzBuzz using Specs2 is showing in listing 4.14.
 
 ```
 class FizzBuzzSpec extends Specification with DataTables {
-"fizz buzz should return the correct value" ^ {
-"input" | "output" |
-3:! "Fizz" |
-5:! "Buzz" |
-15:! "FizzBuzz" |
-7:! "7" |>
-{ (input, output) => FizzBuzz.of(input) must_== output }
+    "fizz buzz should return the correct value" ^ {
+        "input" | "output" |
+        3:! "Fizz" |
+        5:! "Buzz" |
+        15:! "FizzBuzz" |
+        7:! "7" |>
+        { (input, output) => FizzBuzz.of(input) must_== output }
+    }
 }
 ```
 ```
@@ -1161,15 +1125,14 @@ checked but using equality is quicker and easier than writing a custom matcher[^
 
 ```
 public boolean equals(Object o) {
-if (this == o) return true;
-if (o == null || getClass() != o.getClass()) return false;
-Item item = (Item) o;
-```
-```
-if (quality != item.quality) return false;
-if (sellIn != item.sellIn) return false;
-if (name != null? !name.equals(item.name) : item.name != null) return false;
-return true;
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Item item = (Item) o;
+
+    if (quality != item.quality) return false;
+    if (sellIn != item.sellIn) return false;
+    if (name != null? !name.equals(item.name) : item.name != null) return false;
+    return true;
 }
 ```
 ```
@@ -1204,11 +1167,10 @@ early test runners
 [^29]: In Java this would be overriding the equals() method; Scala and Ruby allow the overriding of the ‘==’ operator.
 
 [^30]: Especially when using an IDE that allows the generation of such methods
-
-
+ 
+# 5 Isolation
 No matter if you believe a unit test to be a single method/class or several classes working together, tests must
-run fast and be predictable. In order to achieve this it is necessary to isolate both the test and production code
-from the outside world, e.g. file systems and databases. It is also necessary to control dependencies that have
+run fast and be predictable. In order to achieve this it is necessary to isolate both the test and production cofrom the outside world, e.g. file systems and databases. It is also necessary to control dependencies that have
 natural variance such as a random number generator. A sign that unit tests or code are not properly isolated
 are tests that fail, but when re-run pass without any code being changed (“flaky”), trying to force your tests
 to run in a particular order or running them X number of times and ensuring a certain percentage pass. Slow
@@ -1231,7 +1193,7 @@ Although unit testing forced the separation, the end result was two classes that
 Single Responsibility Principle – a class that would handle file semantics, which was reusable anywhere this
 would happen, and a class that could read its data from any source that implements InputStream.
 
-##### 5.1 Controlling Collaborators
+## 5.1 Controlling Collaborators
 
 The GildedRose has the notion of ageing items of which some can ultimately end up with a value of zero.
 In the real world (or at least a computer simulated game world) the GildedRose would need to replenish its
@@ -1249,17 +1211,14 @@ make purchasing decisions based on the list returned as shown in listing 5.1.
 
 ```
 public void acceptVisitFrom(Merchant merchant) {
-for (Item item : merchant.itemsForSale()) {
-addItemToStock(item);
-}
+    for (Item item : merchant.itemsForSale()) {
+        addItemToStock(item);
+    }
 }
 ```
 ```
 Listing 5.1: GildedRose adding purchased items to stock
 ```
-## 5 Isolation
-
-
 For this example, assume that the GildedRose will purchase all items the merchant has for sale and payment
 is handled elsewhere.
 
@@ -1268,23 +1227,24 @@ would look something like that shown in listing 5.2.
 
 ```
 public class GildedRoseWillNotBuyFromMerchant {
-@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
-@Mock private Merchant merchant;
-```
-```
-@Test
-public void whenThereAreItemsToBuy() {
-final List<Item> itemsForSale = noItems();
-context.checking(new Expectations() {{
-oneOf(merchant).itemsForSale();
-will(returnValue(noItems));
-}});
-GildedRose gildedRose = gildedRoseWith(startingItems());
-gildedRose.acceptVisitFrom(merchant);
-```
-```
-// verify no items added to stock
-}}
+    @Rule 
+    public final JUnitRuleMockery context = new JUnitRuleMockery();
+
+    @Mock 
+    private Merchant merchant;
+
+    @Test
+    public void whenThereAreItemsToBuy() {
+        final List<Item> itemsForSale = noItems();
+        context.checking(new Expectations() {{
+            oneOf(merchant).itemsForSale();
+            will(returnValue(noItems));
+        }});
+        GildedRose gildedRose = gildedRoseWith(startingItems());
+        gildedRose.acceptVisitFrom(merchant);
+        // verify no items added to stock
+    }
+}
 ```
 ```
 Listing 5.2: Using mocks to verify interactions between the GildedRose and Merchant
@@ -1299,21 +1259,18 @@ stub would always return the same list of items no matter where or when it is ca
 
 ```
 public class GildedRoseWillNotBuyFromMerchant {
-@Test
-public void whenThereAreNoItemsToBuy() {
-GildedRose gildedRose = gildedRoseWith(startingItems());
-gildedRose.acceptVisitFrom(new MerchantWithNoItems());
-```
-```
-// verify no items added to stock
-}
-```
-```
-private class MerchantWithNoItems implements Merchant {
-public List<Item> itemsForSale() {
-return Collections.EMPTY_LIST;
-}
-}
+    @Test
+    public void whenThereAreNoItemsToBuy() {
+        GildedRose gildedRose = gildedRoseWith(startingItems());
+        gildedRose.acceptVisitFrom(new MerchantWithNoItems());
+        // verify no items added to stock
+    }
+
+    private class MerchantWithNoItems implements Merchant {
+        public List<Item> itemsForSale() {
+            return Collections.EMPTY_LIST;
+        }
+    }
 }
 ```
 ```
@@ -1330,33 +1287,26 @@ items at runtime.
 
 ```
 public class GildedRoseWillNotBuyFromMerchant {
-@Test
-public void whenThereAreNoItemsToBuy() {
-GildedRose gildedRose = gildedRoseWith(startingItems());
-```
+    @Test
+    public void whenThereAreNoItemsToBuy() {
+        GildedRose gildedRose = gildedRoseWith(startingItems());
+        gildedRose.acceptVisitFrom(
+            new MerchantWithItems(itemsForSale())
+        );
+        // verify no items added to stock
+    }
 
-```
-gildedRose.acceptVisitFrom(
-new MerchantWithItems(itemsForSale())
-```
-```
-// verify no items added to stock
-}
-```
-```
-private class MerchantWithItems implements Merchant {
-private final List<Item> items;
-```
-```
-public MerchantWithItems (List<Item> items) {
-this.items = items;
-}
-```
-```
-public List<Item> itemsForSale() {
-return items;
-}
-}
+    private class MerchantWithItems implements Merchant {
+        private final List<Item> items;
+
+        public MerchantWithItems(List<Item> items) {
+            this.items = items;
+        }
+
+        public List<Item> itemsForSale() {
+            return items;
+        }
+    }
 }
 ```
 ```
@@ -1373,28 +1323,28 @@ to well named methods as showing in listing 5.5.
 
 ```
 public class GildedRoseWillNotBuyFromMerchant {
-@Rule public final JUnitRuleMockery context = new JUnitRuleMockery();
-@Mock private Merchant merchant;
-```
-```
-@Test
-public void whenThereAreNoItemsToBuy() {
-GildedRose gildedRose = gildedRoseWith(startingItems());
-gildedRose.acceptVisitFrom(
-merchantWith(itemsForSale()));
-```
-```
-// verify no items added to stock
-}
-```
-```
-private Merchant merchantWith(final List<Item> itemsForSale) {
-context.checking(new Expectations() {{
-oneOf(merchant).itemsForSale();
-will(returnValue(itemsForSale));
-}});
-}
-}
+    @Rule 
+    public final JUnitRuleMockery context = new JUnitRuleMockery();
+
+    @Mock 
+    private Merchant merchant;
+
+    @Test
+    public void whenThereAreNoItemsToBuy() {
+        GildedRose gildedRose = gildedRoseWith(startingItems());
+        gildedRose.acceptVisitFrom(
+            merchantWith(itemsForSale())
+        );
+        // verify no items added to stock
+    }
+
+    private Merchant merchantWith(final List<Item> itemsForSale) {
+        context.checking(new Expectations() {{
+            oneOf(merchant).itemsForSale();
+            will(returnValue(itemsForSale));
+        }});
+        return merchant;
+    }
 }
 ```
 ```
@@ -1423,13 +1373,10 @@ and only items within that list should be returned by the merchant, as shown in 
 
 ```
 public void acceptVisitFrom(Merchant merchant) {
-List<Item> itemsForSale =
-merchant.itemsForSale(outOfStockItems());
-for (Item item : itemsForSale) {
-addItemToStock(item);
-```
-```
-}
+    List<Item> itemsForSale = merchant.itemsForSale(outOfStockItems());
+    for (Item item : itemsForSale) {
+        addItemToStock(item);
+    }
 }
 ```
 ```
@@ -1449,18 +1396,15 @@ intelligent IDE refactoring you might not even have to do anything by hand.
 
 ```
 private class MerchantWithItems implements Merchant {
-private final List<Item> items;
-```
-```
-public MerchantWithItems (List<Item> items) {
-this.items = items;
-}
-```
-```
-public List<Item> itemsForSale(List<String> items) {
-return items;
-}
-}
+    private final List<Item> items;
+
+    public MerchantWithItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public List<Item> itemsForSale(List<String> itemNames) {
+        return items;
+    }
 }
 ```
 ```
@@ -1496,22 +1440,18 @@ of every day so it forms part of the updateQuality() method on the GildedRose.
 
 ```
 public class GildedRose {
-private List<Item> items;
-private RecyclingCentre recyclingCentre;
-```
-```
-public GildedRose(RecyclingCentre recyclingCentre, List<Item> items) {
-this.recyclingCentre = recyclingCentre;
-this.items = items;
-}
-```
-```
-public void updateQuality() {
-// existing updating quality code
-```
-```
-recyclingCentre.recycle(itemsToBeRecycled());
-}
+    private List<Item> items;
+    private RecyclingCentre recyclingCentre;
+
+    public GildedRose(RecyclingCentre recyclingCentre, List<Item> items) {
+        this.recyclingCentre = recyclingCentre;
+        this.items = items;
+    }
+
+    public void updateQuality() {
+        // existing updating quality code
+        recyclingCentre.recycle(itemsToBeRecycled());
+    }
 }
 ```
 ```
@@ -1535,7 +1475,7 @@ introduced purely for verifying the RecyclingCentre interaction which can use a 
 of tests are calling the same method on the GildedRose they are testing different behaviours and should be
 isolated as such.
 
-##### 5.2 3rd party Interfaces
+## 5.2 3rd party Interfaces
 
 A golden rule that should be followed is to never, ever mock an interface or class that you don’t own. As well
 as suffering from the problem of tying your tests to the implementation as previously discussed, you are at
@@ -1555,24 +1495,26 @@ that exist that can be used directly within the test. Both solutions are shown i
 ```
 @Test
 public void shouldNotBeMocked() throws Exception {
-final BufferedReader reader =
-context.mock(BufferedReader.class);
-context.checking(new Expectations() {{
-atLeast(1).of(reader).readLine();
-will(onConsecutiveCalls(
-returnValue("first line"),
-returnValue("second line")));
-}});
-// execute code under test
+    final BufferedReader reader = context.mock(BufferedReader.class);
+
+    context.checking(new Expectations() {{
+        atLeast(1).of(reader).readLine();
+        will(onConsecutiveCalls(
+            returnValue("first line"),
+            returnValue("second line")
+        ));
+    }});
+
+    // execute code under test
 }
-}
-```
-```
+
 @Test
 public void shouldUseARealReader() throws Exception {
-BufferedReader reader = new BufferedReader(
-new StringReader("first line\nsecond line"));
-// execute code under test
+    BufferedReader reader = new BufferedReader(
+        new StringReader("first line\nsecond line")
+    );
+
+    // execute code under test
 }
 ```
 ```
@@ -1608,11 +1550,11 @@ maintaining fakes
 
 [^39]: I’ve tried this with JDBC and it’s a complete nightmare
 
-
+# 6 Miscellaneous
 This chapter will cover other random pieces of advice that don’t cohesively fit into the other chapters yet are
 still important
 
-##### 6.1 Test dependency order
+## 6.1 Test dependency order
 
 An often-requested ability is to specify the running order of tests. When writing higher level tests this is fine
 as these are more stories, but unit tests, as has already been discussed, are supposed to fast running isolated
@@ -1621,7 +1563,7 @@ dependency happening. Shared state should be isolated using the techniques shown
 a dependency on previous tests having been run it could be a sign that the test suite isn’t cohesive enough
 and the rules for using common setup outlined in Chapter 4 should be applied.
 
-##### 6.2 Sleeping in tests
+## 6.2 Sleeping in tests
 
 A guaranteed way to slow down a test run is to include sleep statements within the test itself. Typically this
 happens because the code under test is doing something asynchronously. A sleep is the fastest way to solve
@@ -1643,7 +1585,7 @@ code so a tight polling loop is more acceptable that it would be in production c
 construct such as a semaphore should be used that allows the blocking of the test but will release the moment
 the production code is done.
 
-##### 6.3 Not all duplication is bad
+## 6.3 Not all duplication is bad
 
 Chapter 5 discussed the concepts of merciless refactoring and removal of duplication, but not all duplication
 should be removed. An often seen place the duplication should remain is sharing string values where the
@@ -1652,17 +1594,11 @@ in Listing 6.1
 
 ```
 public class HeaderAddingFilter implements ContainerResponseFilter {
-@Override
-public ContainerResponse filter(ContainerRequest request, ContainerResponse response)
-{
-response.getHttpHeaders().add("X-SomeHeader", "SomeValue");
-return response;
-```
-## 6 Miscellaneous
-
-
-```
-}
+    @Override
+    public ContainerResponse filter(ContainerRequest request, ContainerResponse response) {
+        response.getHttpHeaders().add("X-SomeHeader", "SomeValue");
+        return response;
+    }
 }
 ```
 ```
@@ -1672,7 +1608,7 @@ The temptation here is to move the header name to a variable that the test can a
 belief that if the header value changes it should only change in a single place. The problem here is that the
 header should have a very specific name and the test **should** fail if the name changes.
 
-##### 6.4 Testing private methods
+## 6.4 Testing private methods
 
 The simple advice here is “don’t”. Feeling the need to do this is the tests way of signifying a problem with
 code design. Private methods are an implementation detail that should be able to change without breaking
@@ -1685,7 +1621,7 @@ possible and other techniques have to be applied. Enumerating the possibilities 
 book, but the excellent “Working Effectively With Legacy Code” book by Michael Feathers is the bible for
 getting legacy code under test.
 
-##### 6.5 Strict assertions
+## 6.5 Strict assertions
 
 As has been shown throughout this book, assertions are the backbone of any test suite, whether that be che-
 cking return values, state changes or within test doubles. Assertions should be made as flexible as possible
@@ -1705,124 +1641,87 @@ Chapter 4) are an ideal way to avoid this problem.
 
 [^40]: Remember to use your language/assertion framework support for looking in strings rather than using indexOf checks
 
+# Appendix
 
-**The GildedRose Java Source Code**
+## The GildedRose Java Source Code**
 
 ```
 import java.util.ArrayList;
 import java.util.List;
-```
-```
+
 public class GildedRose {
-```
-```
-private static List<Item> items = null;
-```
-```
-/**
-* @param args
-*/
-public static void main(String[] args) {
-```
-```
-System.out.println("OMGHAI!");
-```
-```
-items = new ArrayList<Item>();
-items.add(new Item("+5 Dexterity Vest", 10, 20));
-items.add(new Item("Aged Brie", 2, 0));
-items.add(new Item("Elixir of the Mongoose", 5, 7));
-items.add(new Item("Sulfuras, Hand of Ragnaros", 0, 80));
-items.add(new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20));
-items.add(new Item("Conjured Mana Cake", 3, 6));
-```
-```
-updateQuality();
-}
-```
-```
-public static void updateQuality()
-{
-for (int i = 0; i < items.size(); i++)
-{
-if ((!"Aged Brie".equals(items.get(i).getName())) && !"Backstage passes to a
-TAFKAL80ETC concert".equals(items.get(i).getName()))
-{
-if (items.get(i).getQuality() > 0)
-{
-if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName()))
-{
-items.get(i).setQuality(items.get(i).getQuality() - 1);
-}
-}
-}
-else
-{
-if (items.get(i).getQuality() < 50)
-{
-items.get(i).setQuality(items.get(i).getQuality() + 1);
-```
-```
-if ("Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).
-getName()))
-{
-if (items.get(i).getSellIn() < 11)
-{
-if (items.get(i).getQuality() < 50)
-{
-items.get(i).setQuality(items.get(i).getQuality() + 1);
-}
-}
-```
-#### Appendix
+    private static List<Item> items = null;
 
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        System.out.println("OMGHAI!");
+        items = new ArrayList<Item>();
+        items.add(new Item("+5 Dexterity Vest", 10, 20));
+        items.add(new Item("Aged Brie", 2, 0));
+        items.add(new Item("Elixir of the Mongoose", 5, 7));
+        items.add(new Item("Sulfuras, Hand of Ragnaros", 0, 80));
+        items.add(new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20));
+        items.add(new Item("Conjured Mana Cake", 3, 6));
+        updateQuality();
+    }
 
-if (items.get(i).getSellIn() < 6)
-{
-if (items.get(i).getQuality() < 50)
-{
-items.get(i).setQuality(items.get(i).getQuality() + 1);
-}
-}
-}
-}
-}
+    public static void updateQuality() {
+        for (int i = 0; i < items.size(); i++) {
+            if ((!"Aged Brie".equals(items.get(i).getName())) && 
+                !"Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName())) {
+                
+                if (items.get(i).getQuality() > 0) {
+                    if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName())) {
+                        items.get(i).setQuality(items.get(i).getQuality() - 1);
+                    }
+                }
+            } else {
+                if (items.get(i).getQuality() < 50) {
+                    items.get(i).setQuality(items.get(i).getQuality() + 1);
+                    if ("Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName())) {
+                        if (items.get(i).getSellIn() < 11) {
+                            if (items.get(i).getQuality() < 50) {
+                                items.get(i).setQuality(items.get(i).getQuality() + 1);
+                            }
+                        }
+                        if (items.get(i).getSellIn() < 6) {
+                            if (items.get(i).getQuality() < 50) {
+                                items.get(i).setQuality(items.get(i).getQuality() + 1);
+                            }
+                        }
+                    }
+                }
+            }
 
-if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName()))
-{
-items.get(i).setSellIn(items.get(i).getSellIn() - 1);
-}
+            if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName())) {
+                items.get(i).setSellIn(items.get(i).getSellIn() - 1);
+            }
 
-if (items.get(i).getSellIn() < 0)
-{
-if (!"Aged Brie".equals(items.get(i).getName()))
-{
-if (!"Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).
-getName()))
-{
-if (items.get(i).getQuality() > 0)
-{
-if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName()))
-{
-items.get(i).setQuality(items.get(i).getQuality() - 1);
+            if (items.get(i).getSellIn() < 0) {
+                if (!"Aged Brie".equals(items.get(i).getName())) {
+                    if (!"Backstage passes to a TAFKAL80ETC concert".equals(items.get(i).getName())) {
+                        if (items.get(i).getQuality() > 0) {
+                            if (!"Sulfuras, Hand of Ragnaros".equals(items.get(i).getName())) {
+                                items.get(i).setQuality(items.get(i).getQuality() - 1);
+                            }
+                        }
+                    } else {
+                        items.get(i).setQuality(items.get(i).getQuality() - items.get(i).getQuality());
+                    }
+                } else {
+                    if (items.get(i).getQuality() < 50) {
+                        items.get(i).setQuality(items.get(i).getQuality() + 1);
+                    }
+                }
+            }
+        }
+    }
 }
-}
-}
-else
-{
-items.get(i).setQuality(items.get(i).getQuality() - items.get(i).
-getQuality());
-}
-}
-else
-{
-if (items.get(i).getQuality() < 50)
-{
-items.get(i).setQuality(items.get(i).getQuality() + 1);
-} } } } } }
+```
 
-
-#### About the Author
+# About the Author
 
 **Colin Vipurs** started professional software development in 1998 and released his first production bug shortly
 after. He has spent his career working in a variety of industries using a wide range of technologies always
