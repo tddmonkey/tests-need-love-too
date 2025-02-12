@@ -69,7 +69,9 @@ view the source code online or in your favourite IDE.
 
 [^1]: If you’ve ever read TV or radio listings in a newspaper, magazine or online there’s a good chance what you’ve read has be-
 en through some of my software
+
 [^2] _[http://c2.com/cgi/wiki?TestInfected]:(http://c2.com/cgi/wiki?TestInfected)_
+
 [^3] _[http://craftsmanship.sv.cmu.edu/exercises/gilded-rose-kata]:(http://craftsmanship.sv.cmu.edu/exercises/gilded-rose-kata)_
 
 #### Introduction
