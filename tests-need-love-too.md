@@ -1485,11 +1485,8 @@ that you use API the way you think it should be used which itself could be wrong
 you the false confidence that your code is correct.
 
 There are two solutions to this problem and the correct one to choose is context dependent. The first instance
-is where an acceptable real class exists that can be substituted. In Java there is a class called BufferedReader
-that _“Reads text from a character-input stream, buffering characters so as to provide for the efficient reading of charac-_
-
-
-_ters, arrays, and lines”_[^38]_._ It is possible to mock out the use of this class, but instead there are implementations
+is where an acceptable real class exists that can be substituted. In Java there is a class called [BufferedReader](http://docs.oracle.com/javase/8/docs/api/java/io/BufferedReader.html)
+that _“Reads text from a character-input stream, buffering characters so as to provide for the efficient reading of characters, arrays, and lines”_. It is possible to mock out the use of this class, but instead there are implementations
 that exist that can be used directly within the test. Both solutions are shown in listing 5.9.
 
 ```
@@ -1545,8 +1542,6 @@ performs correctly is to exercise it.
 
 [^37]: Steve Freeman, one of the authors of jMock explained that they wrote it because they spent so much time writing and
 maintaining fakes
-
-[^38] _[http://docs.oracle.com/javase/8/docs/api/java/io/BufferedReader.html]:(http://docs.oracle.com/javase/8/docs/api/java/io/BufferedReader.html)_
 
 [^39]: I’ve tried this with JDBC and it’s a complete nightmare
 
